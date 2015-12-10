@@ -1,0 +1,236 @@
+// 描述：页面图片文本元素示例
+
+// 纯文本列表 --------------------------------------------------
+/* text list -*/
+.text-list {
+  li { }
+  i {
+    float: right;
+    font-style: normal;
+  }
+  b {
+    margin-right: 1px;
+    font-weight: normal;
+  }
+  span {
+    margin-left: 3px;
+  }
+}
+/* common text list */
+.tl-common {
+  line-height: 24px;
+  li {
+    color: $base-font-color;
+    padding-left: 12px;
+    background: url(../images/dot.png) no-repeat left center;
+  }
+  a {
+    color: $base-font-color;
+    &:hover {
+      color: $base-link-color;
+    }
+  }
+  i {
+    color: #999;
+  }
+  b {
+    color: #999;
+    a {
+      color: #999;
+    }
+  }
+  span {
+    color: #666;
+  }
+}
+/*-order text list-*/
+.tl-order {
+  line-height: 24px;
+  li {
+    .itemNum {
+    margin-right: 2px;
+    padding: 0 3px;
+    line-height: 16px;
+    text-align: center;
+    color: #999;
+    background: #eee;
+    left: 0;
+    top: 5px;
+    }
+  }
+  a {
+    color: $base-font-color;
+    &:hover {
+      color: $base-link-color;
+    }
+  }
+  i {
+    color: #999;
+  }
+  b {
+    color: #999;
+    a {
+      color: #999;
+    }
+  }
+  span {
+    color: #666;
+  }
+}
+
+// 图片列表 --------------------------------------------------
+/* images list */
+.images-list {
+  li {   }
+  img {
+    display: block;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-align: center;
+    vertical-align: middle;
+  }
+  span {
+    text-align: center;
+  }
+}
+/* master images list */
+.il-master {
+  li {
+    float: left;
+    padding: 10px;
+  }
+  img {
+    padding: 3px;
+    border: 1px solid $base-border-color;
+    background: #fff;
+  }
+  a { }
+  span {
+    display: block;
+    padding-top: 2px;
+  }
+}
+/* assist images list */
+.il-assist {
+  li {
+    float: left;
+    padding: 10px;
+  }
+  img {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    margin-right: 5px;
+    padding: 2px;
+    border: 1px solid $base-border-color;
+    background: #fff;
+  }
+  a { }
+  span {
+    display: inline;
+  }
+}
+
+// 图文混排 --------------------------------------------------
+/* mixin list */
+.mixin-list {
+  .tit {
+    a { }
+  }
+  .img {
+    float: left;
+    a { }
+    img {
+      display: block;
+      text-align: center;
+      vertical-align: middle;
+    }
+    span {
+      display: block;
+      text-align: center;
+    }
+  }
+  .list {
+    li { }
+    a {
+      @include anchor();
+    }
+  }
+  .para {
+    .more { }
+  }
+}
+/* single mixin list */
+.ml-single {
+  padding: 10px;
+  .tit {
+    margin-left: 115px;
+    font-weight: 700;
+    line-height: 24px;
+    .tit a { }
+  }
+  .img {
+    margin-top: -18px;
+    a { }
+    img {
+      border: 1px solid #666;
+    }
+    span {
+      padding-top: 2px;
+    }
+  }
+  .list {
+    margin-left: 115px;
+    line-height: 20px;
+    li { }
+    a { }
+  }
+  .para {
+    margin-left: 120px;
+    text-indent: 2em;
+    .more {
+      margin-left: 5px;
+    }
+  }
+}
+/* multiple mixin list */
+.ml-multiple {
+  padding: 10px;
+  .tit {
+    margin-left: 115px;
+    font-weight: 700;
+    line-height: 22px;
+    a { }
+  }
+  .img {
+    margin-top: -16px;
+    a { }
+    img {
+      position: relative;
+      border: 1px solid #666;
+    }
+    span {
+      position: relative;
+      height: 20px;
+      line-height: 20px;
+      margin-top: -21px;
+      margin-left: 1px;
+      background: #333;
+      color: #fff;
+      @include opacity(0.8);
+    }
+  }
+  .list {
+    li { }
+    a { }
+  }
+  .para {
+    text-indent: 1em;
+    line-height: 20px;
+    margin-left: 115px;
+    .more {
+      color: $base-link-color;
+    }
+  }
+}
+

@@ -1,0 +1,243 @@
+// 描述：表单页面组件模块定义
+
+/* form && fieldset element */
+// Form Wrap
+.base-form {
+}
+.form-field {
+  padding:10px;
+  border:1px solid #ccc;
+  legend {
+    background:#fff;
+  }
+}
+// Form List
+.form-list {
+  padding:0 5px;
+  line-height:30px;
+  li {
+    padding:1px 0;
+    clear:both;
+    .lab {
+      float:left;
+      width:60px;
+      padding:0 5px;
+      text-align:right;
+    }
+    .mod {
+      float:left;
+      padding:0 5px;
+    }
+  }
+  &.clearfix {
+    zoom:1;
+    li:after {
+      visibility:hidden;
+      display:block;
+      font-size:0;
+      content:".";
+      clear:both;
+      height:0;
+    }
+  }
+}
+/* from buttons */
+// Custom Style Buttons
+input {
+  &.form-image {
+    vertical-align:middle;
+  }
+  &.form-reset,
+  &.form-button,
+  &.form-submit {
+    @include form-input-btn(#ddd, rgb(249,249,249), #3e3e3e);
+    background: -moz-linear-gradient(top,  rgba(249,249,249,1) 0%, rgba(244,244,244,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(249,249,249,1)), color-stop(100%,rgba(244,244,244,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(249,249,249,1) 0%,rgba(244,244,244,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(249,249,249,1) 0%,rgba(244,244,244,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(249,249,249,1) 0%,rgba(244,244,244,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(249,249,249,1) 0%,rgba(244,244,244,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#f4f4f4',GradientType=0 ); /* IE6-9 */
+  }
+  &.form-reset-alt,
+  &.form-button-alt,
+  &.form-submit-alt {
+    @include form-input-btn(#3089be, rgb(54,155,215), #fff);
+  }
+}
+a {
+  &.form-btn {
+    @include form-input-btn(#ddd, rgb(249,249,249), #3e3e3e);
+  }
+  &.form-btn-alt {
+    @include form-input-btn(#3089be, rgb(54,155,215), #fff);
+  }
+}
+/* input uploader */
+// Input File with custom style
+.uploader {
+  position:relative;
+  .path {
+    width:120px;
+    cursor:pointer;
+    vertical-align:middle;
+  }
+  .btn {
+    width:60px;
+    height:24px;
+    border:1px solid #308bc2;
+    background:rgb(54,155,215);
+    @include border-radius(2px);
+    cursor:pointer;
+    color:#fff;
+    text-decoration:none !important;
+    vertical-align:middle;
+  }
+  .file {
+    position:absolute;
+    left:0;top:-2px;
+    width:200px;
+    height:24px;
+    vertical-align:top;
+    cursor:pointer;
+    @include opacity(0);
+  }
+}
+/* jquery.selectbox */
+// Simulate Select with style
+.sbHolder{
+  background: #fdfdfd url(../images/frmlist_itm.gif) no-repeat;
+  border: solid 1px #ccc;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  height: 26px;
+  position: relative;
+  width: 206px;
+}
+.sbHolder:focus .sbSelector{
+  border-color: #ccc;
+}
+.sbSelector{
+  display: block;
+  height: 26px;
+  left: 0;
+  line-height: 26px;
+  outline: none;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 10px;
+  top: 0;
+  width: 176px;
+  &:link, &:visited, &:hover{
+    color: #3e3e3e;
+    outline: none;
+    text-decoration: none;
+  }
+}
+.sbToggle{
+  background: url(../images/select-icons.png) 0 -118px no-repeat;
+  display: block;
+  height: 26px;
+  outline: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  &:hover{
+    background: url(../images/select-icons.png) 0 -168px no-repeat;
+  }
+}
+.sbToggleOpen{
+  background: url(../images/select-icons.png) 0 -18px no-repeat;
+  &:hover{
+    background: url(../images/select-icons.png) 0 -68px no-repeat;
+  }
+}
+.sbHolderDisabled{
+  background-color: #3C3C3C;
+  border: solid 1px #515151;
+  .sbHolder{
+  }
+  .sbToggle{
+  }
+}
+.sbOptions{
+  background-color: #fdfdfd;
+  border: solid 1px #ccc;
+  list-style: none;
+  left: -1px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 26px;
+  width: 206px;
+  z-index: 1;
+  overflow-y: auto;
+  li{
+    margin:0;
+    padding:0 !important;
+    &.last a {
+      border-bottom: none;
+    }
+  }
+  a{
+    display: block;
+    outline: none;
+    padding: 0 0 0 3px;
+    &:link, &:visited{
+      color: $base-font-color;
+      text-decoration: none;
+    }
+    &:hover,
+    &:focus,
+    &.sbFocus{
+      color: #ff8126;
+    }
+  }
+  .sbDisabled{
+    color: #999;
+    display: block;
+    padding: 0 0 0 3px;
+  }
+  .sbGroup{
+    border-top: dashed 1px #bbb;
+    color: #1b5ab9;
+    display: block;
+    font-weight: bold;
+    padding: 3px 0 3px 3px;
+  }
+  .sbSub{
+    padding-left: 17px;
+  }
+}
+/* placeholder */
+// Simulate Placeholder for all browsers
+.placeholder {
+  display:inline-block;
+  *display:inline;
+  *zoom:1;
+  height:24px;
+  line-height:24px;
+  position:relative;
+  .p_input {
+  }
+  .p_label {
+    display:inline-block;
+    *display:inline;
+    zoom:1;
+    position:absolute;
+    left:0;
+    top:0;
+    *top:2px;
+    height:24px;
+    line-height:24px;
+    width:200px;
+    color:#999;
+    cursor:text;
+    text-indent:5px;
+  }
+  .p_label.disable {
+    visibility:hidden;
+  }
+}

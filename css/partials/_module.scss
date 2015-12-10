@@ -1,0 +1,261 @@
+// 描述：页面通用组件模块定义
+
+// Wrapper Module
+/* base wrapper */
+.wrapper {
+}
+.wrap-tit {
+  line-height:30px;
+  background:$base-border-color;
+}
+.wrap-tit-l {
+  float:left;
+  padding-left:10px;
+}
+.wrap-tit-r {
+  float:right;
+  padding-right:10px;
+  a {
+    color: $base-font-color;
+  }
+}
+.wrap-inner {
+  border-left:1px solid $base-border-color;
+  border-right:1px solid $base-border-color;
+}
+.wrap-btm {
+  background:$base-border-color;
+}
+.wrap-btm-l {
+  float:left;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  background:$base-border-color;
+  line-height:1px;
+  font-size:1px;
+}
+.wrap-btm-r {
+  float:right;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  background:$base-border-color;
+  line-height:1px;
+  font-size:1px;
+}
+/* other wrapper */
+.comWrap {
+  .wrap-tit {
+  border:1px solid #0074bd;
+  background:#007bc7;
+  line-height:34px;
+  }
+  .wrap-tit-l {
+    height:34px;
+    font-size:14px;
+    font-weight:700;
+    color:#fff;
+    cursor:default;
+  }
+  .wrap-tit-r {
+    height:34px;
+    font-size:14px;
+    color:#fff;
+    a {
+      text-decoration:none !important;
+      color:#fff !important;
+    }
+  }
+  .wrap-inner {
+    background:#fff;
+    border-left:1px solid #e3e2e1;
+    border-right:1px solid #e3e2e1;
+  }
+  .wrap-btm {
+    height:5px;
+    line-height:5px;
+    overflow:hidden;
+    background:#e3e2e1 url(../images/wrap_btm_m.png) repeat-x ;
+  }
+  .wrap-btm-l {
+    height:5px;
+    line-height:5px;
+    overflow:hidden;
+    background:#e3e2e1 url(../images/wrap_btm_l.png) no-repeat left top;
+  }
+  .wrap-btm-r {
+    height:5px;
+    line-height:5px;
+    overflow:hidden;
+    background:#e3e2e1 url(../images/wrap_btm_r.png) no-repeat right top;
+  }
+}
+
+// Breadcrumb Navigation
+/* crumb */
+.crumb {
+  height:30px;
+  line-height:30px;
+  overflow:hidden;
+  background:#eee;
+  border:1px solid $base-border-color;
+  .crumb-l {
+    display:block;
+    float:left;
+    width:5px;
+    height:100%;
+    overflow:hidden;
+    background:url(../images/xxx.png) no-repeat left top;
+  }
+  .crumb-r {
+    display:block;
+    float:right;
+    width:5px;
+    height:100%;
+    overflow:hidden;
+    background:url(../images/xxx.png) no-repeat right top;
+  }
+  .crumb-m {
+    height:100%;
+    color:#666;
+    a {
+      text-decoration:none !important;
+    }
+    .home {
+      color: #000;
+      b {
+        font-weight: 700;
+      }
+    }
+    .home, link {
+      margin:0 5px;
+      color:#666;
+    }
+    .label {
+      margin:0 5px;
+    }
+  }
+}
+
+// Pagination Style
+/* paging */
+.pages {
+  height:30px;
+  padding:10px;
+  .list {
+    font-family:tahoma, arial, sans-serif;
+    font-size:12px;
+    font-weight:400;
+    color:$base-font-color;
+    a, b {
+      display:inline-block;
+      *display:inline;
+      *zoom:1;
+      width:18px;
+      height:18px;
+      line-height:18px;
+      margin:0 1px;
+      padding:5px 6px;
+      border:1px solid $base-border-color;
+      background:#fff;
+      cursor:pointer;
+      text-decoration:none;
+    }
+    a.cur, b {
+      border-color:$base-border-color;
+      background-color:#999;
+      color:#fff;
+      cursor:default;
+    }
+    em {
+      padding:5px 6px;
+    }
+  }
+}
+
+// Table List
+/*- table list -*/
+.comTabList {
+  border:1px solid $base-border-color;
+  tr {
+    border-bottom:1px solid $base-border-color;
+    &.odd {
+      background-color:#fff;
+    }
+    &.eve {
+      background-color:#f6f6f6;
+    }
+    &.first {
+      border-top:none;
+    }
+    &:last-child,
+    &.last {
+      border-bottom:none;
+    }
+  }
+  th, td {
+    line-height:24px;
+    padding:6px 10px;
+    border-bottom:1px solid #d9d9d9;
+    /*border-right:1px solid #d9d9d9;*/
+    &.last {
+      border-right:none;
+    }
+  }
+  th {
+    padding:6px 10px;
+    font-weight:700;
+    background-color:#eee;
+
+  }
+  td {
+     a.item {
+       display:block;
+       text-decoration:none !important;
+     }
+  }
+  tr {
+    &:hover, &.hover {
+      td {
+        background-color:#dfeff9;
+        border-bottom:1px solid #ccdee3;
+      }
+    }
+    &.last {
+      td {
+        border-bottom:none !important;
+      }
+    }
+  }
+  .operate {
+    display:block;
+    text-align:center;
+    a {
+      color:#0074bb !important;
+      &.opt_del {
+        display:inline-block;
+        *display:inline;
+        *zoom:1;
+        width:13px;
+        white-space:nowrap;
+        margin-right:3px;
+        color:#e00;
+        background:url(../images/opt_del.gif) no-repeat left center;
+        text-decoration:none !important;
+      }
+    }
+  }
+  input {
+    vertical-align:middle;
+  }
+  .userBG,
+  .userAvater {
+    padding: 10px 0 10px 5px;
+    vertical-align:middle;
+    img {
+      vertical-align:middle;
+    }
+  }
+}
+

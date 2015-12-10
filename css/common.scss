@@ -1,0 +1,25 @@
+@charset "utf-8";
+/*	Common.css
+	Author:dew
+	Date:2015-11-18
+	Description:Framework layout & module
+--------------------------------------------------------------------------------*/
+
+// variables and mixin
+@import "partials/variables";
+@import "partials/mixin";
+
+// project base style
+@import "partials/common";
+
+// base layout - include header and footer
+@import "partials/layout";
+@import "partials/header";
+@import "partials/footer";
+
+// base modules
+@import "partials/module";
+// base fieldset
+@import "partials/fieldset";
+// page elements
+@import "partials/element";

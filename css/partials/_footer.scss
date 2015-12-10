@@ -1,0 +1,18 @@
+// 描述：项目自定义页脚样式
+
+/* footer */
+.foot-nav {
+  margin:5px 0;
+  text-align:center;
+  li {
+    display:inline;
+  }
+  a {
+    padding:0 5px;
+  }
+}
+.copyright {
+  margin:5px 0;
+  line-height:24px;
+  color:$base-font-color;
+}

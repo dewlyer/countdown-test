@@ -1,0 +1,27 @@
+// 描述：重设表单元素基础样式
+
+/* form element base style */
+input {
+  &[type="radio"], &.radio,
+  &[type="checkbox"], &.checkbox {
+    @include input-align();
+  }
+  &[type="text"], &.text,
+  &[type="password"], &.password {
+    @include input-size-border(4px);
+  }
+}
+textarea {
+  @include input-size-border(5px);
+}
+select {
+  @include input-size-border(3px);
+  optgroup {
+    font-weight:700;
+    font-style:normal;
+  }
+  option {
+    font-weight:400;
+    font-style:normal;
+  }
+}

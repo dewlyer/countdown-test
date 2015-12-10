@@ -1,0 +1,13 @@
+@charset "utf-8";
+/*	Common.css
+	Author:dew
+	Date:2015-11-18
+	Description:Framework 1000px and 1200px grid system
+--------------------------------------------------------------------------------*/
+
+// variables and mixins
+@import "partials/variables";
+@import "partials/mixin";
+
+// grid system
+@import "partials/grid";

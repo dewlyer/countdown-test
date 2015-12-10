@@ -1,0 +1,15 @@
+@charset "utf-8";
+/*	Base.css
+	Author:dew
+	Date:2015-11-18
+	Description:Framework reset and global style
+--------------------------------------------------------------------------------*/
+
+// variables and mixins
+@import "partials/variables";
+@import "partials/mixin";
+
+// reset and base class
+@import "partials/reset";
+@import "partials/form";
+@import "partials/class";

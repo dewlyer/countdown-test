@@ -1,0 +1,64 @@
+// 描述：项目自定义页头样式
+
+/* topbar */
+.top-login {
+  padding-left:0;
+  a {
+    margin-right:10px;
+  }
+}
+.top-nav {
+  padding-right:5px;
+  a {
+    margin-left:10px;
+  }
+}
+/* header */
+.site-name {
+  display:none;
+}
+.site-logo {
+  height:100px;
+  line-height:100px;
+  overflow:hidden;
+  img {
+    display: block;
+  }
+}
+.site-nav {
+  float:right;
+  height:100px;
+  line-height:100px;
+  li {
+    float:left;
+    display:inline;
+    margin-left:10px;
+    a {
+      color:#333;
+      text-decoration:none;
+      @include anchor($decorate-act:none);
+    }
+  }
+}
+.main-nav {
+  font-size:14px;
+  line-height:30px;
+  background:#eee;
+  margin:0;
+  li {
+    float:left;
+    padding:0 10px 0 10px;
+    a {
+      color:$base-font-color;
+      text-decoration:none;
+      @include anchor($decorate-act:none);
+    }
+  }
+}
+.site-banner {
+  background:#eee;
+  img {
+    display:block;
+    text-align:center;
+  }
+}
