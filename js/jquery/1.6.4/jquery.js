@@ -453,7 +453,7 @@ jQuery.extend({
 		// Catch cases where $(document).ready() is called after the
 		// browser event has already occurred.
 		if ( document.readyState === "complete" ) {
-			// Handle it asynchronously to allow scripts the opportunity to delay ready
+			// Handle it asynchronously to allow js the opportunity to delay ready
 			return setTimeout( jQuery.ready, 1 );
 		}
 
@@ -6888,7 +6888,7 @@ jQuery.fn.extend({
 					self.html( selector ?
 						// Create a dummy div to hold the results
 						jQuery("<div>")
-							// inject the contents of the document in, removing the scripts
+							// inject the contents of the document in, removing the js
 							// to avoid any 'Permission Denied' errors in IE
 							.append(responseText.replace(rscript, ""))
 

@@ -1,5 +1,5 @@
 requirejs.config({
-    baseUrl: 'scripts/app',
+    baseUrl: 'js/app',
     paths: {
         jquery: '../jquery/1.9.1/jquery.min'
     }

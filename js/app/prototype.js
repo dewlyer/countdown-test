@@ -1,7 +1,19 @@
 define(['jquery'], function($){
     return {
-        calculate: function() {
-            var totalMsec = Math.abs(this.current - this.appoint);
+        init: function() {
+            var self = this;
+            self.appoint = new Date(this.settings.appoint);
+            self.current = new Date(this.settings.current);
+            self.build();
+            self.calculate();
+            self.render();
+            setInterval(function(){
+                self.refresh();
+            }, 1000);
+        },
+        calculate: function(current) {
+            current = current || this.current;
+            var totalMsec = Math.abs(current - this.appoint);
             var totalSec = totalMsec / 1000;
             this.seconds = Math.floor(totalSec) % 60;
             this.minutes = Math.floor(totalSec/60) % 60;
@@ -12,19 +24,7 @@ define(['jquery'], function($){
             //this.minutes = parseInt((this.totalSec - this.days*24*3600 - this.hours*3600) / 60);
             //this.seconds = parseInt(this.totalSec - this.days*24*3600 - this.hours*3600 - this.minutes*60);
         },
-        init: function() {
-            var self = this;
-            self.build();
-            self.calculate();
-            self.render();
-
-            setTimeout(function(){
-                self.refreshUnit(self.$seconds, 1);
-            }, 1000);
-        },
         build: function() {
-            this.appoint = new Date(this.settings.appoint);
-            this.current = new Date(this.settings.current);
             this.$days = $(this.settings.days);
             this.$hours = $(this.settings.hours);
             this.$minutes = $(this.settings.minutes);
@@ -60,13 +60,28 @@ define(['jquery'], function($){
             }
             obj.append('<div class="split">'+ mark +'</div>');
         },
+        refresh: function(){
+            var self = this;
+            self.calculate(Date.now());
+            self.refreshUnit(self.$days, self.days);
+            self.refreshUnit(self.$hours, self.hours);
+            self.refreshUnit(self.$minutes, self.minutes);
+            self.refreshUnit(self.$seconds, self.seconds);
+        },
         refreshUnit: function(obj, val){
             var numbers = this.splitNum(val);
             for(var j in numbers) {
-                obj.find('.unit-set').eq(j).find('.unit').removeClass('active').eq(numbers[j]).addClass('active');
+                //obj.find('.unit-set').eq(j).find('.unit').removeClass('previous').eq(numbers[(j-1)]).addClass('previous');
+                var $units = obj.find('.unit-set').eq(j).find('.unit');
+                $units.removeClass('active previous');
+                $units.eq(numbers[j]).addClass('active');
+                var k = j>numbers.length ? j-1 : 0;
+                $units.eq(numbers[k]).addClass('previous');
+
+                //obj.find('.unit-set').eq(j).find('.unit').removeClass('active').eq(numbers[j]).addClass('active')
+                //    .prev('.unit').addClass('previous');
             }
             //debugger;
-            console.info('%crefreshUnit','font-weight:bold');
         },
         splitNum: function(val) {
             var numbs = [], digit = 0;
