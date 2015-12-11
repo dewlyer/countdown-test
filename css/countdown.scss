@@ -1,3 +1,30 @@
+$height: 100px;
+$perspective: $height*4;
+$animSpeed: 0.3s;
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+@mixin flip($start: 0deg, $end: -90deg) {
+  0% {
+    transform: perspective($perspective) rotateX($start);
+  }
+  100% {
+    transform: perspective($perspective) rotateX($end);
+  }
+}
+
 html, body {
   display: block;
   height: 100%;
@@ -6,28 +33,37 @@ body {
   font: 12px Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, \5B8B\4F53 ;
   line-height: 1.5;
   background: #fff;
-  color: #333; }
+  color: #333;
+}
+
+@include keyframes(flipTop){
+  @include flip(0deg, -90deg);
+}
+@include keyframes(flipBottom){
+  @include flip(90deg, 0deg);
+}
 
 .countdown {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 0; top: 0;
+  color: #FFF;
+  height: $height;
+  line-height: $height;
   text-align: center;
   width: auto;
-  color: #FFF;
-  font-size: 90px;
-  font-weight: bold;
-  line-height: 100px;
-  height: 100px;
-  font-family: Arial, sans-serif;
+  font: {
+    family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    size: $height * 0.9;
+    weight: bold;
+  }
   .split {
     display: inline-block;
     width: 80px;
     height: 100%;
-    color: #333;
     padding: 0 10px;
-    vertical-align: top;
     border: 1px solid #fff;
+    color: #333;
+    vertical-align: top;
     font: {
       size: 78px;
       family: \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, tahoma, arial, serif;
@@ -40,10 +76,10 @@ body {
     float: left;
   }
   .unit-set {
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    border-radius: $height / 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.8);
     border: 1px solid #111111;
-    width: 70px;
+    width: $height * 0.7;
     height: 100%;
     display: inline-block;
     position: relative;
@@ -57,7 +93,7 @@ body {
       left: 0;
       overflow: hidden;
       height: 50%;
-      padding: 0 10px;
+      padding: 0 $height / 10;
       &.unit-top,
       &.unit-shadow-top {
         background-color: #333;
@@ -65,10 +101,10 @@ body {
         box-sizing: border-box;
         top: 0;
         z-index: 0;
-        border-radius: 10px 10px 0 0;
+        border-radius: $height / 10 $height / 10 0 0;
         &:before {
           content: "";
-          box-shadow: inset 0 10px 25px rgba(0, 0, 0, 0.4);
+          box-shadow: inset 0 10px 25px rgba(0,0,0,0.4);
           height: 100%;
           width: 100%;
           position: absolute;
@@ -77,25 +113,25 @@ body {
         }
       }
       &.unit-shadow-top {
-        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0)), to(black));
-        width: 70px;
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0,0,0,0)), to(#000));
+        width: $height * 0.7;
         opacity: 0;
-        -webkit-transition: opacity 0.3s ease-in;
+        -webkit-transition: opacity $animSpeed ease-in;
       }
       &.unit-bottom,
       &.unit-shadow-bottom {
         background-color: #333;
         bottom: 0;
-        z-index: 0;
-        border-radius: 0 0 10px 10px;
+        z-index:0;
+        border-radius: 0 0 $height / 10 $height / 10;
         .unit-wrap {
           display: block;
           margin-top: -100%;
         }
         &:before {
           content: "";
-          box-shadow: inset 0 10px 25px rgba(0, 0, 0, 0.3);
-          border-radius: 0 0 10px 10px;
+          box-shadow: inset 0 10px 25px rgba(0,0,0,0.3);
+          border-radius: 0 0 $height / 10 $height / 10;
           height: 100%;
           width: 100%;
           position: absolute;
@@ -104,10 +140,10 @@ body {
         }
       }
       &.unit-shadow-bottom {
-        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(black), to(rgba(0, 0, 0, 0)));
-        width: 50px;
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#000), to(rgba(0,0,0,0)));
+        width: $height / 2;
         opacity: 0;
-        -webkit-transition: opacity 0.3s ease-in;
+        -webkit-transition: opacity $animSpeed ease-in;
       }
     }
     &.previous {
@@ -116,13 +152,13 @@ body {
         opacity: 1;
         z-index: 2;
         -webkit-transform-origin: 50% 100%;
-        -webkit-animation: flipTop 0.3s ease-in both;
+        -webkit-animation: flipTop $animSpeed ease-in both;
         -moz-transform-origin: 50% 100%;
-        -moz-animation: flipTop 0.3s ease-in both;
+        -moz-animation: flipTop $animSpeed ease-in both;
         -ms-transform-origin: 50% 100%;
-        -ms-animation: flipTop 0.3s ease-in both;
+        -ms-animation: flipTop $animSpeed ease-in both;
         transform-origin: 50% 100%;
-        animation: flipTop 0.3s ease-in both;
+        animation: flipTop $animSpeed ease-in both;
       }
       .unit-bottom,
       .unit-shadow-bottom {
@@ -137,13 +173,13 @@ body {
       .unit-bottom {
         z-index: 2;
         -webkit-transform-origin: 50% 0%;
-        -webkit-animation: flipBottom 0.3s 0.3s ease-out both;
+        -webkit-animation: flipBottom $animSpeed $animSpeed ease-out both;
         -moz-transform-origin: 50% 0%;
-        -moz-animation: flipBottom 0.3s 0.3s ease-out both;
+        -moz-animation: flipBottom $animSpeed $animSpeed ease-out both;
         -ms-transform-origin: 50% 0%;
-        -ms-animation: flipBottom 0.3s 0.3s ease-out both;
+        -ms-animation: flipBottom $animSpeed $animSpeed ease-out both;
         transform-origin: 50% 0%;
-        animation: flipBottom 0.3s 0.3s ease-out both;
+        animation: flipBottom $animSpeed $animSpeed ease-out both;
       }
     }
   }

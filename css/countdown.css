@@ -8,26 +8,66 @@ body {
   background: #fff;
   color: #333; }
 
+@-webkit-keyframes flipTop {
+  0% {
+    transform: perspective(400px) rotateX(0deg); }
+  100% {
+    transform: perspective(400px) rotateX(-90deg); } }
+@-moz-keyframes flipTop {
+  0% {
+    transform: perspective(400px) rotateX(0deg); }
+  100% {
+    transform: perspective(400px) rotateX(-90deg); } }
+@-ms-keyframes flipTop {
+  0% {
+    transform: perspective(400px) rotateX(0deg); }
+  100% {
+    transform: perspective(400px) rotateX(-90deg); } }
+@keyframes flipTop {
+  0% {
+    transform: perspective(400px) rotateX(0deg); }
+  100% {
+    transform: perspective(400px) rotateX(-90deg); } }
+@-webkit-keyframes flipBottom {
+  0% {
+    transform: perspective(400px) rotateX(90deg); }
+  100% {
+    transform: perspective(400px) rotateX(0deg); } }
+@-moz-keyframes flipBottom {
+  0% {
+    transform: perspective(400px) rotateX(90deg); }
+  100% {
+    transform: perspective(400px) rotateX(0deg); } }
+@-ms-keyframes flipBottom {
+  0% {
+    transform: perspective(400px) rotateX(90deg); }
+  100% {
+    transform: perspective(400px) rotateX(0deg); } }
+@keyframes flipBottom {
+  0% {
+    transform: perspective(400px) rotateX(90deg); }
+  100% {
+    transform: perspective(400px) rotateX(0deg); } }
 .countdown {
   position: absolute;
   left: 0;
   top: 0;
+  color: #FFF;
+  height: 100px;
+  line-height: 100px;
   text-align: center;
   width: auto;
-  color: #FFF;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 90px;
-  font-weight: bold;
-  line-height: 100px;
-  height: 100px;
-  font-family: Arial, sans-serif; }
+  font-weight: bold; }
   .countdown .split {
     display: inline-block;
     width: 80px;
     height: 100%;
-    color: #333;
     padding: 0 10px;
-    vertical-align: top;
     border: 1px solid #fff;
+    color: #333;
+    vertical-align: top;
     font-size: 78px;
     font-family: \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, tahoma, arial, serif;
     font-weight: 400; }
@@ -69,7 +109,7 @@ body {
           left: 0;
           top: 0; }
       .countdown .unit > div.unit-shadow-top {
-        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(transparent), to(black));
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(transparent), to(#000));
         width: 70px;
         opacity: 0;
         -webkit-transition: opacity 0.3s ease-in; }
@@ -91,7 +131,7 @@ body {
           left: 0;
           top: 0; }
       .countdown .unit > div.unit-shadow-bottom {
-        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(black), to(transparent));
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#000), to(transparent));
         width: 50px;
         opacity: 0;
         -webkit-transition: opacity 0.3s ease-in; }
