@@ -62,9 +62,9 @@ define(['jquery'], function($){
         refresh: function(){
             var self = this;
             self.calculate(Date.now());
-            //self.refreshUnit(self.$days, self.days);
-            //self.refreshUnit(self.$hours, self.hours);
-            //self.refreshUnit(self.$minutes, self.minutes);
+            self.refreshUnit(self.$days, self.days);
+            self.refreshUnit(self.$hours, self.hours);
+            self.refreshUnit(self.$minutes, self.minutes);
             self.refreshUnit(self.$seconds, self.seconds);
         },
         refreshUnit: function(obj, val){
@@ -74,11 +74,6 @@ define(['jquery'], function($){
                 $units.removeClass('active previous');
                 $units.eq(numbers[j]-1).addClass('previous');
                 $units.eq(numbers[j]).addClass('active');
-
-                //obj.find('.unit-set').eq(j).find('.unit').removeClass('active').eq(numbers[j]).addClass('active')
-                //    .prev('.unit').addClass('previous');
-                //console.log('j is %O, k is %O', $units.eq(numbers[j]), $units.eq(numbers[j]-1));
-                //debugger;
             }
         },
         splitNum: function(val) {
