@@ -103,14 +103,6 @@ define(['jquery'], function($){
             if(numbs.length<=1){ numbs.push(0); }
             numbs.reverse();
             return numbs;
-        },
-        count: function() {
-            var self = this;
-            this.timer = setInterval(function() {
-                //self.calculate();
-                //console.log(self.seconds);
-                //self.settings.seconds.find('unit-set>.unit').eq(self.seconds).addClass('active');
-            }, 1000);
         }
     }
 });
