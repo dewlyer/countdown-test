@@ -140,15 +140,31 @@ body {
       opacity: 1;
       z-index: 2;
       -webkit-transform-origin: 50% 100%;
-      -webkit-animation: flipTop 0.3s ease-in both;
       -moz-transform-origin: 50% 100%;
-      -moz-animation: flipTop 0.3s ease-in both;
       -ms-transform-origin: 50% 100%;
-      -ms-animation: flipTop 0.3s ease-in both;
       transform-origin: 50% 100%;
-      animation: flipTop 0.3s ease-in both; }
+      -webkit-animation: flipTop 0.3s ease-in 0s both;
+      -moz-animation: flipTop 0.3s ease-in 0s both;
+      -ms-animation: flipTop 0.3s ease-in 0s both;
+      animation: flipTop 0.3s ease-in 0s both; }
     .countdown .unit.previous .unit-bottom,
     .countdown .unit.previous .unit-shadow-bottom {
+      z-index: 1;
+      opacity: 1; }
+    .countdown .unit.following .unit-top,
+    .countdown .unit.following .unit-shadow-top {
+      opacity: 1;
+      z-index: 2;
+      -webkit-transform-origin: 50% 100%;
+      -moz-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+      -webkit-animation: flipTop 0.3s ease-in 0s both;
+      -moz-animation: flipTop 0.3s ease-in 0s both;
+      -ms-animation: flipTop 0.3s ease-in 0s both;
+      animation: flipTop 0.3s ease-in 0s both; }
+    .countdown .unit.following .unit-bottom,
+    .countdown .unit.following .unit-shadow-bottom {
       z-index: 1;
       opacity: 1; }
     .countdown .unit.active .unit-top {
@@ -156,12 +172,12 @@ body {
     .countdown .unit.active .unit-bottom {
       z-index: 2;
       -webkit-transform-origin: 50% 0%;
-      -webkit-animation: flipBottom 0.3s 0.3s ease-out both;
       -moz-transform-origin: 50% 0%;
-      -moz-animation: flipBottom 0.3s 0.3s ease-out both;
       -ms-transform-origin: 50% 0%;
-      -ms-animation: flipBottom 0.3s 0.3s ease-out both;
       transform-origin: 50% 0%;
-      animation: flipBottom 0.3s 0.3s ease-out both; }
+      -webkit-animation: flipBottom 0.3s ease-out 0.3s both;
+      -moz-animation: flipBottom 0.3s ease-out 0.3s both;
+      -ms-animation: flipBottom 0.3s ease-out 0.3s both;
+      animation: flipBottom 0.3s ease-out 0.3s both; }
 
 /*# sourceMappingURL=countdown.css.map */

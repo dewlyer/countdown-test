@@ -19,6 +19,13 @@ define(['jquery'], function($){
         calculate: function(current) {
             var self = this;
             current = current || self.current;
+            if(current >= self.appoint) {
+                self.comming = false;
+            }
+            else {
+                self.comming = true;
+            }
+
             var totalMsec = Math.abs(current - self.appoint);
             var totalSec = totalMsec / 1000;
             self.seconds = Math.floor(totalSec) % 60;
@@ -71,9 +78,17 @@ define(['jquery'], function($){
             var numbers = this.splitNum(val);
             for(var j in numbers) {
                 var $units = obj.find('.unit-set').eq(j).find('.unit');
-                $units.removeClass('active previous');
-                $units.eq(numbers[j]-1).addClass('previous');
-                $units.eq(numbers[j]).addClass('active');
+                var unitCur = numbers[j];
+                var unitPrev = numbers[j]==0 ? 9 : numbers[j]-1;
+                var unitNext = numbers[j]==9 ? 0 : numbers[j]+1;
+                $units.removeClass('active previous following');
+                if(this.comming) {
+                    $units.eq(unitNext).addClass('following');
+                }
+                else {
+                    $units.eq(unitPrev).addClass('previous');
+                }
+                $units.eq(unitCur).addClass('active');
             }
         },
         splitNum: function(val) {

@@ -24,6 +24,16 @@ $animSpeed: 0.3s;
     transform: perspective($perspective) rotateX($end);
   }
 }
+@mixin animate($origin, $animation){
+  -webkit-transform-origin: $origin;
+  -moz-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  transform-origin: $origin;
+  -webkit-animation: $animation;
+  -moz-animation: $animation;
+  -ms-animation: $animation;
+  animation: $animation;
+}
 
 html, body {
   display: block;
@@ -151,14 +161,20 @@ body {
       .unit-shadow-top {
         opacity: 1;
         z-index: 2;
-        -webkit-transform-origin: 50% 100%;
-        -webkit-animation: flipTop $animSpeed ease-in both;
-        -moz-transform-origin: 50% 100%;
-        -moz-animation: flipTop $animSpeed ease-in both;
-        -ms-transform-origin: 50% 100%;
-        -ms-animation: flipTop $animSpeed ease-in both;
-        transform-origin: 50% 100%;
-        animation: flipTop $animSpeed ease-in both;
+        @include animate(50% 100%, flipTop $animSpeed ease-in 0s both);
+      }
+      .unit-bottom,
+      .unit-shadow-bottom {
+        z-index: 1;
+        opacity: 1;
+      }
+    }
+    &.following {
+      .unit-top,
+      .unit-shadow-top {
+        opacity: 1;
+        z-index: 2;
+        @include animate(50% 100%, flipTop $animSpeed ease-in 0s both);
       }
       .unit-bottom,
       .unit-shadow-bottom {
@@ -172,14 +188,7 @@ body {
       }
       .unit-bottom {
         z-index: 2;
-        -webkit-transform-origin: 50% 0%;
-        -webkit-animation: flipBottom $animSpeed $animSpeed ease-out both;
-        -moz-transform-origin: 50% 0%;
-        -moz-animation: flipBottom $animSpeed $animSpeed ease-out both;
-        -ms-transform-origin: 50% 0%;
-        -ms-animation: flipBottom $animSpeed $animSpeed ease-out both;
-        transform-origin: 50% 0%;
-        animation: flipBottom $animSpeed $animSpeed ease-out both;
+        @include animate(50% 0%, flipBottom $animSpeed ease-out $animSpeed both);
       }
     }
   }
