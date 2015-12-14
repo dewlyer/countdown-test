@@ -6,37 +6,40 @@ define(['jquery'], function($){
             self.current = new Date(self.settings.current);
             self.build();
             self.render();
+            self.start();
         },
         build: function() {
             var self = this;
-            self.$days = $(self.settings.days);
-            self.$hours = $(self.settings.hours);
-            self.$minutes = $(self.settings.minutes);
-            self.$seconds = $(self.settings.seconds);
-            $(self.element).append(self.$days).append(self.$hours).append(self.$minutes).append(self.$seconds);
-            self.calculate();
+            if(self.settings.days) {
+                self.$days = $(self.settings.days);
+                self.$days.appendTo(self.element);
+            }
+            if(self.settings.hours) {
+                self.$hours = $(self.settings.hours);
+                self.$hours.appendTo(self.element);
+            }
+            if(self.settings.minutes) {
+                self.$minutes = $(self.settings.minutes);
+                self.$minutes.appendTo(self.element);
+            }
+            if(self.settings.seconds) {
+                self.$seconds = $(self.settings.seconds);
+                self.$seconds.appendTo(self.element);
+            }
         },
-        calculate: function(current) {
+        start: function() {
             var self = this;
-            current = current || self.current;
-            if(current >= self.appoint) {
-                self.comming = false;
+            self.refresh();
+            if(self.settings.auto) {
+                self.timer = setInterval(function(){
+                    self.refresh();
+                }, 1000);
             }
-            else {
-                self.comming = true;
-            }
-
-            var totalMsec = Math.abs(current - self.appoint);
-            var totalSec = totalMsec / 1000;
-            self.seconds = Math.floor(totalSec) % 60;
-            self.minutes = Math.floor(totalSec/60) % 60;
-            self.hours = Math.floor(totalSec/3600) % 24;
-            self.days = Math.floor(totalSec/86400);
-            //this.days = parseInt(this.totalSec / 3600 / 24);this.hours = parseInt((this.totalSec - this.days*24*3600) / 3600);this.minutes = parseInt((this.totalSec - this.days*24*3600 - this.hours*3600) / 60);this.seconds = parseInt(this.totalSec - this.days*24*3600 - this.hours*3600 - this.minutes*60);
         },
         render: function() {
             var self = this;
-            self.renderUnit(self.$days, self.days, self.settings.marker.days);
+            self.calculate();
+            self.renderUnit(self.$days, self.days, self.settings.marker.days, true);
             self.renderUnit(self.$hours, self.hours, self.settings.marker.hours);
             self.renderUnit(self.$minutes, self.minutes, self.settings.marker.minutes);
             self.renderUnit(self.$seconds, self.seconds, self.settings.marker.seconds);
@@ -47,49 +50,59 @@ define(['jquery'], function($){
                 'left':         '50%',
                 'top':          '50%'
             });
-            self.timer = setInterval(function(){
-                self.refresh();
-            }, 1000);
         },
-        renderUnit: function(obj, val, mark) {
-            var $unitSet = $('<div class="unit-set"></div>');
-            for(var i=0; i<=9; i++) {
-                $unitSet.append(this.settings.template);
-                $('.unit:last', $unitSet).find('.unit-wrap').text(i);
-            }
-
+        renderUnit: function(obj, val, mark, decimal) {
+            if(typeof(obj) == 'undefined') return;
+            var self = this;
             var numbers = this.splitNum(val);
-            for(var j in numbers) {
-                var $unitSetClone = $unitSet.clone();
-                $unitSetClone.find('.unit').eq(numbers[j]).addClass('active');
-                obj.append($unitSetClone);
-            }
+            $.each(numbers, function(index, value) {
+                var counts = (!decimal && index==1) ? 5 : 9;
+                var $unitSetClone = self.clone(counts);
+                $unitSetClone.data('value', value);
+                obj.prepend($unitSetClone);
+            });
             obj.append('<div class="split">'+ mark +'</div>');
         },
-        refresh: function(){
+        clone: function(counts) {
+            var self = this;
+            var $unitSet = $('<div class="unit-set">');
+            for(var i=0; i<=counts; i++) {
+                $unitSet.append(self.settings.template);
+                $('.unit:last', $unitSet).find('.unit-wrap').text(i);
+            }
+            return $unitSet;
+        },
+        refresh: function() {
             var self = this;
             self.calculate(Date.now());
-            self.refreshUnit(self.$days, self.days);
-            self.refreshUnit(self.$hours, self.hours);
-            self.refreshUnit(self.$minutes, self.minutes);
             self.refreshUnit(self.$seconds, self.seconds);
+            self.refreshUnit(self.$minutes, self.minutes);
+            self.refreshUnit(self.$hours, self.hours);
+            self.refreshUnit(self.$days, self.days);
         },
-        refreshUnit: function(obj, val){
-            var numbers = this.splitNum(val);
-            for(var j in numbers) {
-                var $units = obj.find('.unit-set').eq(j).find('.unit');
-                var unitCur = numbers[j];
-                var unitPrev = numbers[j]==0 ? 9 : numbers[j]-1;
-                var unitNext = numbers[j]==9 ? 0 : numbers[j]+1;
-                $units.removeClass('active previous following');
-                if(this.comming) {
-                    $units.eq(unitNext).addClass('following');
+        refreshUnit: function(obj, val) {
+            var self = this;
+            if(typeof(obj) == 'undefined') return;
+            var numbers = self.splitNum(val);
+
+            $.each(numbers, function(index, value) {
+                var $unitSet = obj.find('.unit-set');
+                var $unit = $unitSet.eq(index).find('.unit');
+                if($unit.data('value') == value) return true;
+
+                $unit.data('value', value);
+                var unitPrev = value-1;
+                var unitNext = value==$unit.length-1 ? 0 : value+1;
+                $unit.removeClass('active previous following');
+                if(self.comming) {
+                    $unit.eq(unitNext).addClass('following');
                 }
                 else {
-                    $units.eq(unitPrev).addClass('previous');
+                    $unit.eq(unitPrev).addClass('previous');
                 }
-                $units.eq(unitCur).addClass('active');
-            }
+                $unit.eq(value).addClass('active');
+            });
+
         },
         splitNum: function(val) {
             var numbs = [], digit = 0;
@@ -99,10 +112,23 @@ define(['jquery'], function($){
                 numbs.push(digit);
             }
             while(val>=1);
-
-            if(numbs.length<=1){ numbs.push(0); }
+            if(numbs.length<=1){
+                numbs.push(0);
+            }
             numbs.reverse();
             return numbs;
+        },
+        calculate: function(current) {
+            var self = this;
+            current = current || self.current;
+            self.comming  = current < self.appoint;
+
+            var totalMsec = Math.abs(current - self.appoint);
+            var totalSec = totalMsec / 1000;
+            self.seconds = Math.floor(totalSec) % 60;
+            self.minutes = Math.floor(totalSec/60) % 60;
+            self.hours = Math.floor(totalSec/3600) % 24;
+            self.days = Math.floor(totalSec/86400);
         }
     }
 });

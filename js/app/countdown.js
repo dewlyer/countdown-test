@@ -6,8 +6,6 @@ define(['jquery', './defaults', './prototype'], function($, defaults, prototype)
         this.defaults = defaults;
         this.options = options;
         this.settings = $.extend({}, this.defaults, this.options);
-
-        this.init();
     };
     CountDown.prototype = prototype;
     return CountDown;
