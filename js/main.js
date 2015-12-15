@@ -1,11 +1,11 @@
 requirejs.config({
-    baseUrl: 'js/app',
+    baseUrl: 'js',
     paths: {
-        jquery: '../jquery/1.9.1/jquery.min'
+        jquery: 'jquery/1.9.1/jquery.min'
     }
 });
 
-requirejs(['app'], function(){
+require(['app'], function(){
     $('<div>', {
         'id':       "countdown",
         'class':    "countdown"
