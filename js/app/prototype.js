@@ -39,10 +39,10 @@ define(['jquery'], function($){
         render: function() {
             var self = this;
             self.calculate();
-            self.renderUnit(self.$days, self.days, self.settings.marker.days, true);
-            self.renderUnit(self.$hours, self.hours, self.settings.marker.hours);
-            self.renderUnit(self.$minutes, self.minutes, self.settings.marker.minutes);
-            self.renderUnit(self.$seconds, self.seconds, self.settings.marker.seconds);
+            self.renderUnit(self.$days, self.days, self.settings.marker.days, 9);
+            self.renderUnit(self.$hours, self.hours, self.settings.marker.hours, [2,3]);
+            self.renderUnit(self.$minutes, self.minutes, self.settings.marker.minutes, [5,9]);
+            self.renderUnit(self.$seconds, self.seconds, self.settings.marker.seconds, [5,9]);
             $(self.element).css({
                 'width':        $(self.element).outerWidth(),
                 'margin-top':   -$(self.element).height() / 2,
@@ -51,15 +51,18 @@ define(['jquery'], function($){
                 'top':          '50%'
             });
         },
-        renderUnit: function(obj, val, mark, decimal) {
+        renderUnit: function(obj, val, mark, radix) {
             if(typeof(obj) == 'undefined') return;
             var self = this;
-            var numbers = this.splitNum(val);
+            var numbers = self.splitNum(val);
             $.each(numbers, function(index, value) {
-                var counts = (!decimal && index==1) ? 5 : 9;
+                var counts = 9;
+                if(radix) {
+                    counts = $.isArray(radix) ? radix[index] : radix;
+                }
                 var $unitSetClone = self.clone(counts);
                 $unitSetClone.data('value', value);
-                obj.prepend($unitSetClone);
+                obj.append($unitSetClone);
             });
             obj.append('<div class="split">'+ mark +'</div>');
         },
@@ -75,18 +78,28 @@ define(['jquery'], function($){
         refresh: function() {
             var self = this;
             self.calculate(Date.now());
-            self.refreshUnit(self.$seconds, self.seconds);
-            self.refreshUnit(self.$minutes, self.minutes);
-            self.refreshUnit(self.$hours, self.hours);
             self.refreshUnit(self.$days, self.days);
+            self.refreshUnit(self.$hours, self.hours);
+            self.refreshUnit(self.$minutes, self.minutes);
+            self.refreshUnit(self.$seconds, self.seconds);
         },
         refreshUnit: function(obj, val) {
             var self = this;
             if(typeof(obj) == 'undefined') return;
             var numbers = self.splitNum(val);
 
+            // numbers change
+            var differ = numbers.length - obj.find('.unit-set').length;
+            if(differ > 0) {
+                obj.find('.unit-set').slice(0, differ).clone().prependTo(obj);
+                console.debug(obj.find('.unit-set').slice(0, 1))
+            }
+            else if(differ < 0) {
+                obj.find('.unit-set').slice(differ).remove();
+            }
+
+            var $unitSet = obj.find('.unit-set');
             $.each(numbers, function(index, value) {
-                var $unitSet = obj.find('.unit-set');
                 var $unit = $unitSet.eq(index).find('.unit');
                 if($unit.data('value') == value) return true;
 

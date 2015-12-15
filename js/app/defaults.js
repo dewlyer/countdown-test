@@ -1,16 +1,16 @@
 define({
     auto:       true,
-    appoint:    '1988-09-07 00:00:00',
+    appoint:    Date.now() + 86400*1000*100,
     current:    Date.now(),
-    seconds:    '<div class="digit seconds">',
-    minutes:    '<div class="digit minutes">',
-    hours:      '<div class="digit hours">',
     days:       '<div class="digit days">',
+    hours:      '<div class="digit hours">',
+    minutes:    '<div class="digit minutes">',
+    seconds:    '<div class="digit seconds">',
     marker: {
-        seconds:    'S',
-        minutes:    'M',
-        hours:      'H',
-        days:       'D'
+        seconds:    '',
+        minutes:    ':',
+        hours:      ':',
+        days:       '-'
     },
     template: '' +
         '<div class="unit">' +
