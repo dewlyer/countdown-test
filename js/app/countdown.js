@@ -1,4 +1,4 @@
-define(['jquery', './defaults', './prototype'], function($, defaults, prototype){
+define(['./defaults', './prototype'], function(defaults, prototype){
     var CountDown = function(element, options) {
         this.timer = null;
         this.comming = true;
