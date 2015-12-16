@@ -1,3 +1,5 @@
+// CountDown 默认参数定义
+// 模块仅含值对，没有任何依赖的定义形式
 define({
     auto:       true,
     appoint:    Date.now() + 86400*1000*100,
