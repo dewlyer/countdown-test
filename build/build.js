@@ -5,7 +5,7 @@
     optimizeCss: "standard",
     mainConfigFile: "../js/main.js",
     removeCombined: true,
-    fileExclusionRegExp: /(^\.|^build)/,
+    fileExclusionRegExp: /^\.|^build|\.scss|\.map/,
     //baseUrl: 'js',
     //paths: {
     //    jquery: 'jquery/1.9.1/jquery.min'
