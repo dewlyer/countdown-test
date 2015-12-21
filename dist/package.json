@@ -1,9 +1,0 @@
-{
-  "name": "countdown",
-  "version": "0.1.0",
-  "author": "dewlyer",
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-requirejs": "^0.4.4"
-  }
-}

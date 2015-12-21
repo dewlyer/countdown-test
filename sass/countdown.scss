@@ -1,0 +1,196 @@
+@charset "utf-8";
+$height: 100px;
+$perspective: $height*4;
+$animSpeed: 0.3s;
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+@mixin flip($start: 0deg, $end: -90deg) {
+  0% {
+    transform: perspective($perspective) rotateX($start);
+  }
+  100% {
+    transform: perspective($perspective) rotateX($end);
+  }
+}
+@mixin animate($origin, $animation){
+  -webkit-transform-origin: $origin;
+  -moz-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  transform-origin: $origin;
+  -webkit-animation: $animation;
+  -moz-animation: $animation;
+  -ms-animation: $animation;
+  animation: $animation;
+}
+
+html, body {
+  display: block;
+  height: 100%;
+}
+body {
+  font: 12px Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, \5B8B\4F53 ;
+  line-height: 1.5;
+  background: #d6d6d6;
+  color: #333;
+}
+
+@include keyframes(flipTop){
+  @include flip(0deg, -90deg);
+}
+@include keyframes(flipBottom){
+  @include flip(90deg, 0deg);
+}
+
+.countdown {
+  position: absolute;
+  left: 0; top: 0;
+  color: #FFF;
+  height: $height;
+  line-height: $height;
+  text-align: center;
+  width: auto;
+  font: {
+    family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    size: $height * 0.9;
+    weight: bold;
+  }
+  .split {
+    display: inline-block;
+    width: 80px;
+    height: 100%;
+    padding: 0 10px;
+    border: 1px solid transparent;
+    color: #333;
+    vertical-align: top;
+    font: {
+      size: 78px;
+      family: \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, tahoma, arial, serif;
+      weight: 400;
+    }
+  }
+  .seconds, .minutes, .hours, .days {
+    height: 100%;
+    display: inline;
+    float: left;
+  }
+  .unit-set {
+    border-radius: $height / 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    border: 1px solid #111111;
+    width: $height * 0.7;
+    height: 100%;
+    display: inline-block;
+    position: relative;
+    margin: 0 1px;
+  }
+  .unit {
+    position: absolute;
+    height: 100%;
+    > div {
+      position: absolute;
+      left: 0;
+      overflow: hidden;
+      height: 50%;
+      padding: 0 $height / 10;
+      &.unit-top,
+      &.unit-shadow-top {
+        background-color: #333;
+        border-bottom: 1px solid #333;
+        box-sizing: border-box;
+        top: 0;
+        z-index: 0;
+        border-radius: $height / 10 $height / 10 0 0;
+        &:before {
+          content: "";
+          box-shadow: inset 0 10px 25px rgba(0,0,0,0.4);
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+      &.unit-shadow-top {
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0,0,0,0)), to(#000));
+        width: $height * 0.7;
+        opacity: 0;
+        -webkit-transition: opacity $animSpeed ease-in;
+      }
+      &.unit-bottom,
+      &.unit-shadow-bottom {
+        background-color: #333;
+        bottom: 0;
+        z-index:0;
+        border-radius: 0 0 $height / 10 $height / 10;
+        .unit-wrap {
+          display: block;
+          margin-top: -100%;
+        }
+        &:before {
+          content: "";
+          box-shadow: inset 0 10px 25px rgba(0,0,0,0.3);
+          border-radius: 0 0 $height / 10 $height / 10;
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+      &.unit-shadow-bottom {
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#000), to(rgba(0,0,0,0)));
+        width: $height / 2;
+        opacity: 0;
+        -webkit-transition: opacity $animSpeed ease-in;
+      }
+    }
+    &.previous {
+      .unit-top,
+      .unit-shadow-top {
+        opacity: 1;
+        z-index: 2;
+        @include animate(50% 100%, flipTop $animSpeed ease-in 0s both);
+      }
+      .unit-bottom,
+      .unit-shadow-bottom {
+        z-index: 1;
+        opacity: 1;
+      }
+    }
+    &.following {
+      .unit-top,
+      .unit-shadow-top {
+        opacity: 1;
+        z-index: 2;
+        @include animate(50% 100%, flipTop $animSpeed ease-in 0s both);
+      }
+      .unit-bottom,
+      .unit-shadow-bottom {
+        z-index: 1;
+        opacity: 1;
+      }
+    }
+    &.active {
+      .unit-top {
+        z-index: 1;
+      }
+      .unit-bottom {
+        z-index: 2;
+        @include animate(50% 0%, flipBottom $animSpeed ease-out $animSpeed both);
+      }
+    }
+  }
+}

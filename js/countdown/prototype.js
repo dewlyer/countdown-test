@@ -96,7 +96,7 @@ define(function(){
             var differ = numbers.length - obj.find('.unit-set').length;
             if(differ > 0) {
                 obj.find('.unit-set').slice(0, differ).clone().prependTo(obj);
-                console.debug(obj.find('.unit-set').slice(0, 1))
+                //console.debug(obj.find('.unit-set').slice(0, 1));
             }
             else if(differ < 0) {
                 obj.find('.unit-set').slice(differ).remove();
@@ -147,5 +147,5 @@ define(function(){
             self.hours = Math.floor(totalSec/3600) % 24;
             self.days = Math.floor(totalSec/86400);
         }
-    }
+    };
 });
