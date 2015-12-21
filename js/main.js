@@ -1,7 +1,7 @@
 // Require.js参数配置
 requirejs.config({
     // 所有模块的查找根路径
-    baseUrl: 'js',
+    baseUrl: 'dist/js',
     // 映射那些不直接放置于baseUrl下的模块名。路径相对于baseUrl开始
     paths: {
         jquery: 'jquery/1.9.1/jquery.min'
