@@ -2,6 +2,16 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    jade: {
+      compile: {
+        options: {
+          pretty: true
+        },
+        files: {
+          "demo/index.html": ["src/jade/index.jade"]
+        }
+      }
+    },
     sass: {
       dist: {
         options: {
@@ -9,7 +19,7 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'sass',
+          cwd: 'src/sass',
           src: ['*.scss'],
           dest: 'dist/css',
           ext: '.css'
@@ -32,27 +42,26 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      all: ['Gruntfile.js', 'js/main.js'],
+      all: ['Gruntfile.js', 'src/js/main.js'],
       app: {
-        src: ['js/app.js', 'js/countdown/*.js']
+        src: ['src/js/app.js', 'src/js/countdown/*.js']
       }
     },
     requirejs: {
       compile: {
         options: {
           //appDir: './',
-          baseUrl: './js',
           dir: './dist/js',
-          //out: "./dist/js/r.min.js",
+          baseUrl: './src/js',
           paths: {
-              jquery: 'jquery/1.9.1/jquery.min'
+            jquery: 'empty:',
+            app: 'app'
           },
-          //allowSourceOverwrites: true,
           optimize: "uglify",
           optimizeCss: "none",
           removeCombined: true,
           fileExclusionRegExp: /^\.|^build|^dist|^node_modules|\.scss$|\.map$/,
-          mainConfigFile: "js/main.js",
+          mainConfigFile: "./src/js/main.js",
           modules: [
             {
               name: 'app',
@@ -74,12 +83,12 @@ module.exports = function(grunt) {
       }
     }
   });
-
+  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-  grunt.registerTask('default', ['sass', 'cssmin', 'jshint', 'requirejs']);
+  grunt.registerTask('default', ['jade', 'sass', 'cssmin', 'jshint', 'requirejs']);
 
 };
