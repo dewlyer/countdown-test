@@ -11,6 +11,10 @@
     "countdown"
   ],
   "description": "countdown plugin",
+  "license": [
+    "MIT"
+  ],
+  "main": "dist/js/app.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/dewlyer/countdown-test.git"
