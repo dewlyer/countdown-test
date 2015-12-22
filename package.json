@@ -26,6 +26,13 @@
     "grunt-contrib-jshint": "^0.11.3",
     "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-sass": "^0.9.2",
-    "grunt-contrib-uglify": "^0.11.0"
+    "grunt-contrib-uglify": "^0.11.0",
+    "gulp": "^3.9.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-requirejs-optimize": "^0.3.1",
+    "gulp-sass": "^2.1.1",
+    "jshint": "^2.8.0"
   }
 }
