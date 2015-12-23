@@ -10,7 +10,7 @@
     "jquery",
     "countdown"
   ],
-  "description": "countdown plugin",
+  "description": "countdown plugin demo for front-end tools testing",
   "license": [
     "MIT"
   ],

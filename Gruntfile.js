@@ -5,7 +5,13 @@ module.exports = function(grunt) {
     jade: {
       compile: {
         options: {
-          pretty: true
+          pretty: true,
+          data: {
+            name: '<%= pkg.name %>',
+            keywords: '<%= pkg.keywords %>',
+            description: '<%= pkg.description %>',
+            path: '../dist'
+          }
         },
         files: {
           "demo/index.html": ["src/jade/index.jade"]
