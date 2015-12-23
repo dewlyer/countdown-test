@@ -52,4 +52,4 @@
 
     gulp.task('default', ['html', 'css', 'jshint', 'requirejs']);
 
-})();
+}());

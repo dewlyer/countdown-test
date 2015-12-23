@@ -1,10 +1,12 @@
 {
   "name": "countdown",
-  "description": "countdown test and demo",
+  "description": "countdown plugin demo for front-end tools testing",
   "main": "dist/js/app.js",
-  "authors": [
-    "[object Object]"
-  ],
+  "authors": {
+    "name": "lilu",
+    "email": "liluak@yeah.net",
+    "url": "#"
+  },
   "license": [
     "MIT"
   ],
