@@ -1,7 +1,8 @@
 (function(){
 
     'use strict';
-    var gulp = require('gulp'),
+    var pkg =  require('./package.json'),
+        gulp = require('gulp'),
         rename = require('gulp-rename'),
         jade = require('gulp-jade'),
         sass = require('gulp-sass'),
@@ -11,7 +12,16 @@
 
     gulp.task('html', function(){
         gulp.src('src/jade/*.jade')
-            .pipe(jade({pretty: true}))
+            .pipe(jade({
+                pretty: true,
+                data: {
+                    debug: false,
+                    name: pkg.name,
+                    keywords: pkg.keywords,
+                    description: pkg.description,
+                    src: require('./source.json')
+                }
+            }))
             .pipe(gulp.dest('demo'));
     });
 
