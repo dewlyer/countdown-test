@@ -4,7 +4,7 @@ requirejs.config({
     baseUrl: '../dist/js',
     // 映射那些不直接放置于baseUrl下的模块名。路径相对于baseUrl开始
     paths: {
-        jquery: '../../libs/jquery/1.9.1/jquery.min'
+        jquery: '../../libs/jquery/dist/jquery.min'
     },
     // 为那些没有使用define()来声明依赖关系、设置模块的"浏览器全局变量注入"型脚本做依赖和导出配置（可选）
     shim: {

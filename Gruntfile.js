@@ -54,8 +54,7 @@ module.exports = function(grunt) {
           dir: './dist/js',
           baseUrl: './src/js',
           paths: {
-            jquery: 'empty:',
-            app: 'app'
+            jquery: 'empty:'
           },
           optimize: "uglify",
           optimizeCss: "none",
