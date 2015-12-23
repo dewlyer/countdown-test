@@ -1,0 +1,9 @@
+{
+  "icon": "images/icon/favicon.ico",
+  "dist": "../dist",
+  "css":  ["/css/base.min.css", "/css/countdown.min.css"],
+  "script": {
+    "requirejs": "../libs/requirejs/require.js",
+    "main": "/js/main"
+  }
+}

@@ -3,11 +3,11 @@ html
     head
         meta(charset="utf-8")
         title #{name}-test
-        meta(name="keywords", content=keywords)
-        meta(name="description", content=description)
-        link(rel="icon", href="images/icon/favicon.ico")
-        link(rel="stylesheet", href=path+"/css/base.min.css")
-        link(rel="stylesheet", href=path+"/css/countdown.min.css")
+        meta(name="keywords", content= keywords)
+        meta(name="description", content= description)
+        link(rel="icon", href= src.icon)
+        each style in src.css
+            link(rel="stylesheet", href= src.dist + style)
     body
-        //引入require.js文件，设置data-main属性，以便require.js加载程序主入口文件-js/main.js
-        script(src="../libs/requirejs/require.js", data-main=path+"/js/main")
+        //引入 require.js 文件，设置 data-main 属性，以便 require.js 加载程序主入口文件 main.js
+        script(src= src.script.requirejs, data-main= src.dist + src.script.main)

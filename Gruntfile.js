@@ -1,5 +1,6 @@
 (function() {
   'use strict';
+
   module.exports = function(grunt) {
 
     grunt.initConfig({
@@ -9,10 +10,11 @@
           options: {
             pretty: true,
             data: {
+              debug: false,
               name: '<%= pkg.name %>',
               keywords: '<%= pkg.keywords %>',
               description: '<%= pkg.description %>',
-              path: '../dist'
+              src: require('./source.json')
             }
           },
           files: {
@@ -96,7 +98,11 @@
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
+    grunt.registerTask('html', ['jade']);
+    grunt.registerTask('css', ['sass', 'cssmin']);
+    grunt.registerTask('js', ['jshint', 'requirejs']);
     grunt.registerTask('default', ['jade', 'sass', 'cssmin', 'jshint', 'requirejs']);
 
   };
+
 }());
