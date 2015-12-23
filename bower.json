@@ -1,31 +1,35 @@
 {
   "name": "countdown",
-  "description": "countdown plugin demo for front-end tools testing",
+  "version": "0.1.0",
   "main": "dist/js/app.js",
-  "authors": {
-    "name": "lilu",
+  "homepage": "https://github.com/dewlyer/countdown-test",
+  "author": {
+    "name": "dewlyer",
     "email": "liluak@yeah.net",
-    "url": "#"
+    "url": "https://github.com/dewlyer"
   },
-  "license": [
-    "MIT"
-  ],
   "keywords": [
     "jquery",
     "countdown"
   ],
-  "homepage": "https://github.com/dewlyer/countdown-test",
+  "description": "countdown plugin demo for front-end tools testing",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dewlyer/countdown-test.git"
+  },
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "requirejs": "~2.1.22"
+  },
   "moduleType": [],
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "lib",
-    "test",
-    "tests"
+    "Gruntfile",
+    "Gulpfile",
+    "package.json"
   ],
-  "dependencies": {
-    "jquery": "~2.1.4",
-    "requirejs": "~2.1.22"
-  }
+  "license": [
+    "MIT"
+  ]
 }
