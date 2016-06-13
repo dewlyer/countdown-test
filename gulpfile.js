@@ -40,7 +40,7 @@
     });
 
     gulp.task('jshint', function(){
-        gulp.src(['Gruntfile.js', 'src/js/main.js', 'src/js/app.js', 'src/js/countdown/*.js'])
+        gulp.src(['gruntfile.js', 'src/js/main.js', 'src/js/app.js', 'src/js/countdown/*.js'])
             .pipe(jshint())
             .pipe(jshint.reporter('default'));
     });
