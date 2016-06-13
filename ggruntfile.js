@@ -52,7 +52,7 @@
         }
       },
       jshint: {
-        all: ['Gruntfile.js', 'src/js/main.js'],
+        all: ['gruntfile.js', 'src/js/main.js'],
         app: {
           src: ['src/js/app.js', 'src/js/countdown/*.js']
         }
