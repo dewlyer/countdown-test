@@ -9,10 +9,10 @@ define({
     minutes:    '<div class="digit minutes">',
     seconds:    '<div class="digit seconds">',
     marker: {
-        seconds:    '',
+        seconds:    ':',
         minutes:    ':',
-        hours:      ':',
-        days:       '-'
+        hours:      '-',
+        days:       ''
     },
     canvas: '<canvas id="canvas" class="canvas" width="600" height="300">' +
                 '<p>您的浏览器不支持Canvas！</p>' +

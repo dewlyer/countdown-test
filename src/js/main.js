@@ -25,6 +25,6 @@ requirejs(['app'], function(){
         'class':    "countdown"
     }).prependTo(document.body).countdown({
         appoint:    '1988/09/07 00:00:00'
-        //appoint:    '2088/09/07 00:00:00'
+        //appoint:    '2016/09/07 00:00:00'
     });
 });

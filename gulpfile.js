@@ -8,8 +8,9 @@
         sass = require('gulp-sass'),
         cleancss = require('gulp-clean-css'),
         jshint = require('gulp-jshint'),
-        //browserSync = require('browser-sync'),
+        browserSync = require('browser-sync'),
         requirejs = require('gulp-requirejs-optimize');
+    var debug = true;
 
     gulp.task('html', function(){
         gulp.src('src/jade/*.jade')
@@ -60,5 +61,23 @@
     });
 
     gulp.task('default', ['html', 'css', 'jshint', 'requirejs']);
-
+    gulp.task('server', ['default'], function() {
+        browserSync.init({
+            server: {
+                baseDir: "./",
+                index: 'demo/index.html'
+            },
+            //startPath: paths.jade.dest,
+            port: 8888
+        });
+        // if(debug) {
+        //     gulp.watch((paths.jade.src), ['html']);
+        //     gulp.watch((paths.scss.src), ['css']);
+        //     gulp.watch((paths.js.src), ['js']);
+        // }
+    });
+    gulp.task('release', function(){
+        debug = false;
+        gulp.start('server');
+    });
 }());

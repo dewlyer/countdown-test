@@ -8,8 +8,8 @@ define(function(){
             var self = this;
             self.appoint = new Date(self.settings.appoint);
             self.current = new Date(self.settings.current);
+            self.fontSize = 50;
             self.build();
-            self.refresh();
             self.start();
         },
         build: function() {
@@ -44,6 +44,47 @@ define(function(){
             });
             self.canvas = self.$canvas.get(0);
             self.ctx = self.canvas.getContext('2d');
+
+            self.calculate();
+            self.offset = {
+                days: {
+                    x: 200,
+                    y: 0
+                },
+                hours: {
+                    x: 380,
+                    y: 0
+                },
+                minutes: {
+                    x: 460,
+                    y: 0
+                },
+                seconds: {
+                    x: 540,
+                    y: 0
+                }
+            };
+            var strDaysLength = self.days.toString().length < 2 ? 2 : self.days.toString().length;
+            var strHoursLength = self.hours.toString().length < 2 ? 2 : self.hours.toString().length;
+            var strMinutesLength = self.minutes.toString().length < 2 ? 2 : self.minutes.toString().length;
+            var strSecondsLength = self.seconds.toString().length < 2 ? 2 : self.seconds.toString().length;
+            var strAllLength =  strDaysLength + strHoursLength + strMinutesLength + strSecondsLength;
+            self.offset.days = {
+                x: 0 - strAllLength*self.fontSize/2,
+                y: 0
+            };
+            self.offset.hours = {
+                x: self.offset.days.x + self.fontSize*strDaysLength,
+                y: 0
+            };
+            self.offset.minutes = {
+                x: self.offset.hours.x + self.fontSize*strHoursLength,
+                y: 0
+            };
+            self.offset.seconds = {
+                x: self.offset.minutes.x + self.fontSize*strMinutesLength,
+                y: 0
+            };
         },
         start: function() {
             var self = this;
@@ -54,105 +95,6 @@ define(function(){
                 }, 1000);
             }
         },
-        render: function() {
-            var self = this;
-            //self.calculate();
-            var offset = {
-                days: {
-                    x: 200,
-                    y: 100
-                },
-                hours: {
-                    x: 380,
-                    y: 100
-                },
-                minutes: {
-                    x: 460,
-                    y: 100
-                },
-                seconds: {
-                    x: 540,
-                    y: 100
-                }
-            };
-            self.renderCanvas(self.days, offset.days, self.settings.marker.days);
-            self.renderCanvas(self.hours, offset.hours, self.settings.marker.hours);
-            self.renderCanvas(self.minutes, offset.minutes, self.settings.marker.minutes);
-            self.renderCanvas(self.seconds, offset.seconds, self.settings.marker.seconds);
-            // self.renderUnit(self.$days, self.days, self.settings.marker.days, 9);
-            // self.renderUnit(self.$hours, self.hours, self.settings.marker.hours, [2,9]);
-            // self.renderUnit(self.$minutes, self.minutes, self.settings.marker.minutes, [5,9]);
-            // self.renderUnit(self.$seconds, self.seconds, self.settings.marker.seconds, [5,9]);
-            // $(self.element).css({
-            //     'width':        $(self.element).outerWidth(),
-            //     'margin-top':   -$(self.element).height() / 2,
-            //     'margin-left':  -$(self.element).width() / 2,
-            //     'left':         '50%',
-            //     'top':          '50%'
-            // });
-        },
-        cleanCanvas: function () {
-            var self = this;
-            var ctx = self.ctx;
-            ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
-        },
-        setRenderStyle: function () {
-            var self = this;
-            var ctx = self.ctx;
-            ctx.font = "50px Arial";
-            ctx.fillStyle = '#333333';
-            // ctx.shadowColor = 'rgba(0,0,0,0.5)';
-            // ctx.shadowOffsetX = 2;
-            // ctx.shadowOffsetY = 2;
-            // ctx.shadowBlur = 3;
-        },
-        renderCanvas: function(val, offset, mark) {
-            var self = this;
-            var ctx = self.ctx;
-            self.setRenderStyle();
-            val = val < 10 ? '0' + val : val;
-            ctx.fillText(val+mark, offset.x, offset.y);
-            // var numbers = self.splitNum(val);
-            // $.each(numbers, function(index, value) {
-            //     var counts = 9;
-            //     if(radix) {
-            //         counts = $.isArray(radix) ? radix[index] : radix;
-            //     }
-            //     var $unitSetClone = self.clone(counts);
-            //     $unitSetClone.data('value', value);
-            //     obj.append($unitSetClone);
-            // });
-            // obj.append('<div class="split">'+ mark +'</div>');
-        },
-        refreshCanvas: function() {
-            var self = this;
-            self.cleanCanvas();
-            self.render();
-        },
-        renderUnit: function(obj, val, mark, radix) {
-            if(typeof(obj) == 'undefined') return;
-            var self = this;
-            var numbers = self.splitNum(val);
-            $.each(numbers, function(index, value) {
-                var counts = 9;
-                if(radix) {
-                    counts = $.isArray(radix) ? radix[index] : radix;
-                }
-                var $unitSetClone = self.clone(counts);
-                $unitSetClone.data('value', value);
-                obj.append($unitSetClone);
-            });
-            obj.append('<div class="split">'+ mark +'</div>');
-        },
-        clone: function(counts) {
-            var self = this;
-            var $unitSet = $('<div class="unit-set">');
-            for(var i=0; i<=counts; i++) {
-                $unitSet.append(self.settings.template);
-                $('.unit:last', $unitSet).find('.unit-wrap').text(i);
-            }
-            return $unitSet;
-        },
         refresh: function() {
             var self = this;
             self.calculate(Date.now());
@@ -161,6 +103,11 @@ define(function(){
             // self.refreshUnit(self.$hours, self.hours);
             // self.refreshUnit(self.$minutes, self.minutes);
             // self.refreshUnit(self.$seconds, self.seconds);
+        },
+        refreshCanvas: function() {
+            var self = this;
+            self.cleanCanvas();
+            self.render();
         },
         refreshUnit: function(obj, val) {
             var self = this;
@@ -195,6 +142,88 @@ define(function(){
                 $unit.eq(value).addClass('active');
             });
 
+        },
+        render: function() {
+            var self = this;
+            self.renderCanvas(self.days, self.offset.days, self.settings.marker.days);
+            self.renderCanvas(self.hours, self.offset.hours, self.settings.marker.hours);
+            self.renderCanvas(self.minutes, self.offset.minutes, self.settings.marker.minutes);
+            self.renderCanvas(self.seconds, self.offset.seconds, self.settings.marker.seconds);
+            // self.renderUnit(self.$days, self.days, self.settings.marker.days, 9);
+            // self.renderUnit(self.$hours, self.hours, self.settings.marker.hours, [2,9]);
+            // self.renderUnit(self.$minutes, self.minutes, self.settings.marker.minutes, [5,9]);
+            // self.renderUnit(self.$seconds, self.seconds, self.settings.marker.seconds, [5,9]);
+            // $(self.element).css({
+            //     'width':        $(self.element).outerWidth(),
+            //     'margin-top':   -$(self.element).height() / 2,
+            //     'margin-left':  -$(self.element).width() / 2,
+            //     'left':         '50%',
+            //     'top':          '50%'
+            // });
+        },
+        renderCanvas: function(val, offset, mark) {
+            var self = this;
+            var ctx = self.ctx;
+            self.setRenderStyle();
+            ctx.save();
+            ctx.translate(self.canvas.width/2, self.canvas.height/2);
+            val = val < 10 ? '0' + val : val;
+            ctx.fillText(val, offset.x, offset.y);
+            ctx.fillText(mark, offset.x-self.fontSize, offset.y);
+            ctx.restore();
+            // var numbers = self.splitNum(val);
+            // $.each(numbers, function(index, value) {
+            //     var counts = 9;
+            //     if(radix) {
+            //         counts = $.isArray(radix) ? radix[index] : radix;
+            //     }
+            //     var $unitSetClone = self.clone(counts);
+            //     $unitSetClone.data('value', value);
+            //     obj.append($unitSetClone);
+            // });
+            // obj.append('<div class="split">'+ mark +'</div>');
+        },
+        renderUnit: function(obj, val, mark, radix) {
+            if(typeof(obj) == 'undefined') return;
+            var self = this;
+            var numbers = self.splitNum(val);
+            $.each(numbers, function(index, value) {
+                var counts = 9;
+                if(radix) {
+                    counts = $.isArray(radix) ? radix[index] : radix;
+                }
+                var $unitSetClone = self.clone(counts);
+                $unitSetClone.data('value', value);
+                obj.append($unitSetClone);
+            });
+            obj.append('<div class="split">'+ mark +'</div>');
+        },
+        cleanCanvas: function () {
+            var self = this;
+            var ctx = self.ctx;
+            ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
+        },
+        setRenderStyle: function () {
+            var self = this;
+            var ctx = self.ctx;
+            ctx.font = self.fontSize+"px Arial";
+            ctx.fillStyle = '#333333';
+            ctx.textAlign='center';//文本水平对齐方式
+            ctx.textBaseline='middle';//文本垂直方向，基线位置
+
+            // ctx.shadowColor = 'rgba(0,0,0,0.5)';
+            // ctx.shadowOffsetX = 2;
+            // ctx.shadowOffsetY = 2;
+            // ctx.shadowBlur = 3;
+        },
+        clone: function(counts) {
+            var self = this;
+            var $unitSet = $('<div class="unit-set">');
+            for(var i=0; i<=counts; i++) {
+                $unitSet.append(self.settings.template);
+                $('.unit:last', $unitSet).find('.unit-wrap').text(i);
+            }
+            return $unitSet;
         },
         splitNum: function(val) {
             var numbs = [], digit = 0;
