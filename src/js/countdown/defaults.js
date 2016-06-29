@@ -14,6 +14,9 @@ define({
         hours:      ':',
         days:       '-'
     },
+    canvas: '<canvas id="canvas" class="canvas" width="600" height="300">' +
+                '<p>您的浏览器不支持Canvas！</p>' +
+            '</canvas>',
     template: '' +
         '<div class="unit">' +
         '  <div class="unit-top">' +

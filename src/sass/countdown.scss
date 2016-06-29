@@ -38,12 +38,12 @@ $animSpeed: 0.3s;
 
 html, body {
   display: block;
-  height: 100%;
+  //height: 100%;
 }
 body {
   font: 12px Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, \5B8B\4F53 ;
   line-height: 1.5;
-  background: #d6d6d6;
+  background: #f3f3f3;
   color: #333;
 }
 
@@ -55,11 +55,11 @@ body {
 }
 
 .countdown {
-  position: absolute;
-  left: 0; top: 0;
+  //position: absolute;
+  //left: 0; top: 0;
   color: #FFF;
-  height: $height;
-  line-height: $height;
+  //height: $height;
+  //line-height: $height;
   text-align: center;
   width: auto;
   font: {

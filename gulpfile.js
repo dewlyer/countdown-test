@@ -35,7 +35,7 @@
                 suffix: ".min",
                 extname: ".css"
             }))
-            .pipe(gulp.dest('dist/css'))
+            .pipe(gulp.dest('dist/css'));
     });
 
     gulp.task('jshint', function(){
