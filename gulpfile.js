@@ -6,8 +6,9 @@
         rename = require('gulp-rename'),
         jade = require('gulp-jade'),
         sass = require('gulp-sass'),
-        cssmin = require('gulp-minify-css'),
+        cleancss = require('gulp-clean-css'),
         jshint = require('gulp-jshint'),
+        //browserSync = require('browser-sync'),
         requirejs = require('gulp-requirejs-optimize');
 
     gulp.task('html', function(){
@@ -27,10 +28,8 @@
 
     gulp.task('css', function(){
         gulp.src('src/sass/**/*.scss')
-            .pipe(sass().on('error', sass.logError))
-            .pipe(cssmin({
-                compatibility: 'ie8'
-            }))
+            .pipe(sass({linefeed: 'crlf'}).on('error', sass.logError))
+            .pipe(cleancss({compatibility: 'ie8', keepSpecialComments: 0}))
             .pipe(gulp.dest('dist/css'))
             .pipe(rename({
                 suffix: ".min",
